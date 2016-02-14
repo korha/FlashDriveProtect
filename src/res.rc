@@ -1,0 +1,8 @@
+1 MANIFEST "FlashDriveProtect.exe.manifest"
+IDI_ICON1 ICON DISCARDABLE "icon.ico"
+IDI_ICON2 ICON DISCARDABLE "img\\success.ico"
+IDI_ICON3 ICON DISCARDABLE "img\\warning.ico"
+IDI_ICON4 ICON DISCARDABLE "img\\vaccinate.ico"
+IDI_ICON5 ICON DISCARDABLE "img\\remove.ico"
+IDI_ICON6 ICON DISCARDABLE "img\\update.ico"
+IDI_ICON7 ICON DISCARDABLE "img\\help.ico"
