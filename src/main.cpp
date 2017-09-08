@@ -56,7 +56,7 @@ static LONG g_iFixWidth, g_iMinHeight;
 #define ___assert___(cond) do{static_cast<void>(sizeof(cond));}while(false)
 #else
 #define ___assert___(cond) do{if(!(cond)){int i=__LINE__;char h[]="RUNTIME ASSERTION. Line:           "; \
-    if(i>=0){char *c=h+35;do{*--c=i%10+'0';i/=10;}while(i>0);}else{h[25]='?';} \
+    if(i>=0){char *c=h+35;do{*--c=i%10+'0';i/=10;}while(i>0);} \
     if(MessageBoxA(nullptr,__FILE__,h,MB_ICONERROR|MB_OKCANCEL)==IDCANCEL)ExitProcess(0);}}while(false)
 #endif
 
@@ -69,10 +69,10 @@ static inline bool FCompareMemory(const BYTE *pBuf1, const void *const pBuf2__, 
     return true;
 }
 
-static inline bool FCompareMemoryW(const wchar_t *pBuf1, const wchar_t *pBuf2, DWORD dwSize)
+static inline bool FIsStartWithW(const wchar_t *pFullStr, const wchar_t *pBeginStr)
 {
-    while (dwSize--)
-        if (*pBuf1++ != *pBuf2++)
+    while (*pBeginStr)
+        if (*pFullStr++ != *pBeginStr++)
             return false;
     return true;
 }
@@ -833,7 +833,7 @@ static const wchar_t * FGetArg(EMode *const eMode)
                             while (*wCmdLine != L' ' && *wCmdLine != L'\t' && *wCmdLine != L'\0')
                                 ++wCmdLine;
 
-                        if (FCompareMemoryW(wArg2, L"/mode:", 6))
+                        if (FIsStartWithW(wArg2, L"/mode:"))
                         {
                             *wCmdLine = L'\0';
                             if (wArg2[6] == L'0' && wArg2[7] == L'\0')
@@ -909,7 +909,7 @@ void FMain()
             if (pArg)
             {
                 ___assert___(pArg[-1] == L'/');
-                if (FCompareMemoryW(pArg, L"drives", 6))
+                if (FIsStartWithW(pArg, L"drives"))
                 {
                     if (pArg[6] == L':')        //selected drives
                     {
@@ -935,7 +935,7 @@ void FMain()
                         return;
                     }
                 }
-                else if (FCompareMemoryW(pArg, L"system", 6))
+                else if (FIsStartWithW(pArg, L"system"))
                 {
                     pArg += 6;
                     if (*pArg == L'+' && pArg[1] == L'\0')

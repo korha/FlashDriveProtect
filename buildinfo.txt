@@ -1,0 +1,4 @@
+x86_64-7.1.0-release-win32-seh-rt_v5-rev2
+i686-7.1.0-release-win32-dwarf-rt_v5-rev2
+
+-c -pipe -fno-keep-inline-dllexport -Wpedantic -Wzero-as-null-pointer-constant -O2 -frtti -Wall -Wextra -fexceptions -mthreads -DUNICODE -DNDEBUG
